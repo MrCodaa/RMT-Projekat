@@ -18,6 +18,7 @@ def send_to_controller(msg):
     global controller_conn
     with lock:
         conn = controller_conn
+
     if conn:
         try:
             proto.send_message(conn, msg)
@@ -200,7 +201,9 @@ def handle_connection(conn, addr):
             if not agent_id:
                 conn.close()
                 return
+
             handle_agent(conn, addr, reg, buf, pending)
+
 
         else:
             print(f"[SERVER] Nepoznata rola: {role}")
@@ -242,7 +245,7 @@ def watchdog():
 def main():
     threading.Thread(target=watchdog, daemon=True).start()
 
-    server_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #sock_dgram je udp a sock_stream je tcp
     server_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     server_sock.bind((HOST, PORT))
     server_sock.listen(64)
