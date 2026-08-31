@@ -553,6 +553,8 @@ class App(ctk.CTk):
 
         self.show_login()
 
+    # Prijava
+
     def show_login(self):
         for w in self.winfo_children():
             w.destroy()
@@ -628,6 +630,8 @@ class App(ctk.CTk):
             if self.sock is not None:
                 self.after(0, self.handle_disconnect, str(e))
 
+    #Postoji prostor za dodatno
+
     def dispatch_message(self, msg):
         if self.dashboard is None:
             return
@@ -663,6 +667,8 @@ class App(ctk.CTk):
 
         elif msg_type == proto.MSG_FILE_ACK:
             self.dashboard.handle_file_ack(msg)
+
+    #Treba se vratiti na ovo
 
     def handle_disconnect(self, reason):
         print(f"[CTRL] Diskonektovan: {reason}")
