@@ -73,18 +73,3 @@ Then use the Controller's **Process List → Refresh → Kill Process** flow to 
 
 The Controller's **Send File** panel rejects files larger than 10 MB before sending.  
 Received files are saved on the agent under `received/` relative to its working directory.
-
-## Architecture notes
-
-| Concern | Choice |
-|---|---|
-| Language | Python 3.10+ |
-| Networking | `socket` + `threading` |
-| Server concurrency | `ThreadPoolExecutor` (one thread per connection) |
-| System metrics | `psutil` |
-| Command execution | `subprocess` (whitelisted only) |
-| GUI | `customtkinter` dark theme |
-| Wire protocol | newline-delimited JSON over TCP |
-| Logging | `logging` with timestamps |
-
-All state lives in memory; restarting the server clears every registry.
